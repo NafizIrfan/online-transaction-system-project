@@ -1,0 +1,24 @@
+<%- include('header') -%>
+<title>Customer Information | B Bank Ltd.</title>
+</head>
+<body>
+
+	<img id="logo" src="/static/assets/logo.png">
+
+		<div  class="text-center center-div" id="login">
+		    <div class="container w-50 py-5 mt-5 main">
+						<div class="title pb-5">
+		            <h2 class="font-weight-bold">Customer Information</h2>
+		        </div>
+						<table class="table table-hover text-center">
+							<tr><td>Name </td><td><%= fullname %></td></tr>
+							<tr><td>Userame </td><td><%= username %></td></tr>
+							<tr><td>Email </td><td><%= email %></td></tr>
+							<tr><td>Balance </td><td><%= balance %></td></tr>
+						</table>
+		        <p id="selectBottom"><a href="/dashboard">Dashboard</a></p>
+		        <p id="selectBottom" class="abc"><a href="/logout">Logout</a></p>
+
+
+
+<%- include('footer') -%>

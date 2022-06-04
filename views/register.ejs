@@ -1,0 +1,82 @@
+<%- include('header') -%>
+
+<title>Registration | B Bank Ltd.</title>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$( "#form1" ).submit(function(event) {
+				event.preventDefault();
+
+				$.ajax({
+					type: 'POST',
+					url: '/register',
+					data: $('#form1').serialize(),
+					dataType: "json",
+					success: function(response){
+						//alert("a");
+						//console.log(response.Success);
+						$('#form1')[0].reset();
+
+						document.getElementById("check").innerHTML=response.Success;
+         					setTimeout(function(){
+         						document.getElementById("check").innerHTML="";
+										console.log("wait");
+         					},3000);
+         					if (response.Success=="Regestered, Please login.") {
+         						document.getElementById("aa").click();
+         					};
+         				},
+         				error: function() {
+         				}
+         			})
+			});
+		});
+	</script>
+</head>
+<body>
+
+	<img id="logo" src="/static/assets/logo.png">
+
+
+	<div class="text-center center-div" id="login">
+	    <div class="container w-50 border py-5 main">
+	        <div class="title pb-5">
+	            <h2 class="font-weight-bold">Register</h2>
+	        </div>
+
+					<div class="form-group">
+	        <form id="form1" method="POST" class="pt-3">
+	            <div class="form-group">
+									<input type="text" name="fullname" placeholder="Full Name" required="" class="form-control"><br/>
+	            </div>
+	            <div class="form-group">
+								<input type="text" name="username" placeholder="Username" required="" class="form-control"><br/>
+	            </div>
+							<div class="form-group">
+	                <input type="email" name="email" placeholder="Email" required="" class="form-control"><br/>
+	            </div>
+							<div class="form-group">
+	                <input type="password" name="password" placeholder="Password" required="" class="form-control"><br/>
+	            </div>
+							<div class="form-group">
+	                <input type="password" name="passwordConf" placeholder="Confirm Password" required="" class="form-control"><br/>
+	            </div>
+							<div class="form-group">
+	                <input type="number" name="balance" placeholder="Initial Balance" required="" class="form-control"><br/>
+	            </div>
+	            <button type="submit" value="Register" class="btn btn-success rounded-pill">Submit</button>
+	        </form>
+	    </div>
+			<div class="mssg bg-danger">
+				<span id="check"></span>
+			</div>
+			<div id="LangTable"><a href="/" id="aa"></a>
+			</div>
+			<div>
+				<span>Already Registered! <a href="/">Login</a></span>
+			</div>
+
+
+
+<%- include('footer') -%>

@@ -1,0 +1,89 @@
+<%- include('header') -%>
+
+<title>Password Reset | B Bank Ltd.</title>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$( "#form2" ).submit(function(event) {
+
+				event.preventDefault();
+
+				$.ajax({
+					type: 'POST',
+					url: '/forgetpass',
+					data: $('#form2').serialize(),
+					dataType: "json",
+					success: function(response){
+						//alert("a");
+						//console.log(response.Success);
+						$('#form2')[0].reset();
+						//alert("abc");
+						document.getElementById("check").innerHTML=response.Success;
+
+						setTimeout(function(){
+							document.getElementById("check").innerHTML="";
+							console.log("wait");
+						},3000);
+						if (response.Success=="Password changed!") {
+							document.getElementById("aa").click();
+						};
+					},
+					error: function() {
+					}
+				})
+			});
+
+		});
+	</script>
+</head>
+<body>
+
+<img id="logo" src="/static/assets/logo.png">
+
+
+<div class="text-center center-div" id="login">
+		<div class="container w-50 border py-5 main">
+				<div class="title pb-5">
+						<h2 class="font-weight-bold">Change Password</h2>
+				</div>
+
+				<div class="form-group">
+				<form id="form2" method="POST" class="pt-3">
+						<div class="form-group">
+								<input type="text" name="email" placeholder="Email" required="" class="form-control"><br/>
+						</div>
+						<div class="form-group">
+							<input type="password" name="password" placeholder="Password" required="" class="form-control"><br/>
+						</div>
+						<div class="form-group">
+							<input type="password" name="passwordConf" placeholder="Confirm Password" required="" class="form-control"><br/>
+						</div>
+						<button type="submit" value="Change" class="btn btn-success rounded-pill">Submit</button>
+				</form>
+		</div>
+		<div class="mssg bg-danger">
+			<span id="check" ></span>
+		</div>
+		<div id="LangTable"><a href="/" id="aa"></a>
+		</div>
+		<div>
+			<span>Do you want to Login?</span><a href="/">Click here</a>
+		<div>
+			<span>Create a new Account?</span><a href="/register">Register here</a>
+		</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
